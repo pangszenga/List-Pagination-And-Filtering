@@ -47,8 +47,7 @@ const pageHeader = document.querySelector(".page-header");
 const page = document.querySelector(".page");
 const studentList = Array.from(document.querySelectorAll(".student-item")); // this is an array
 const studentListNames = document.querySelectorAll(".student-details h3"); // name array to search through
-
-
+const originalUl = document.querySelector("ul");
 
 
 
@@ -62,7 +61,6 @@ console.log(reminder);
 //2 Main functions - Search and Pagination (showPage and appendPageLinks functions)
 
 function showPage() {
-  //hide exisitng list
   //increment the number of items per page and index each page
 
     let raw1 = studentList.slice( 0, 10);
@@ -72,7 +70,9 @@ function showPage() {
     let raw5 = studentList.slice(40, 50);
     let raw6 = studentList.slice(50, 55);
 
-
+  //hide exisitng list
+  page.removeChild(originalUl);
+  console.log(originalUl);
 
   //append items to div and link with button THEN link with button click
     for (let i = 0; i <= 9 ; i ++)
@@ -83,16 +83,20 @@ function showPage() {
         ul.classList.add("student-list");
 
         let li = document.createElement("li");
-        li.classList.add("student-item");
-        li.classList.add("cf");
-        li.innerHTML = raw1[i].innerHTML;
 
-        ul.innerHTML = li.innerHTML;
+        li.innerHTML = raw1[i].innerHTML;
+        // li.classList.add("student-item");
+
+        ul.innerHTML = `<li class="student-item cf"> ${li.innerHTML} </li>`;
+
+        console.log(ul);
 
         document.querySelector(".page-header").appendChild(ul);
-        console.log(document.querySelector(".page-header"));
+        // console.log(document.querySelector(".page-header"));
       };//CONDITIONAL STATEMENT ENDS
     };
+
+
 
 
 // why are things automatically going into a div
