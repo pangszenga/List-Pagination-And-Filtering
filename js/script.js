@@ -49,6 +49,9 @@ const studentList = Array.from(document.querySelectorAll(".student-item")); // t
 const studentListNames = document.querySelectorAll(".student-details h3"); // name array to search through
 
 
+
+
+
 //Determine the number of blocks of students to display + reminder = disregard limitation of different number of students
 
 let numOfPages = Math.ceil(studentList.length / 10);
@@ -59,6 +62,7 @@ console.log(reminder);
 //2 Main functions - Search and Pagination (showPage and appendPageLinks functions)
 
 function showPage() {
+  //hide exisitng list
   //increment the number of items per page and index each page
 
     let raw1 = studentList.slice( 0, 10);
@@ -68,22 +72,33 @@ function showPage() {
     let raw5 = studentList.slice(40, 50);
     let raw6 = studentList.slice(50, 55);
 
-    let test= raw1[0]
-    console.log(raw1[0]);
-    document.querySelector(".page-header").appendChild(test);
+
 
   //append items to div and link with button THEN link with button click
-    // for (let i = 0; i <= 9 ; i ++)
-    // {
-    //   let append = document.createElement("ul");
-    //   append.classList.add("student-list");
-    //   append.innerHTML = raw1[i];
-    //   document.querySelector(".page-header").appendChild(append);
-    //
-    // };
+    for (let i = 0; i <= 9 ; i ++)
+    {
+      if(i <= 9)
+      {
+        let ul = document.createElement("ul");
+        ul.classList.add("student-list");
+
+        let li = document.createElement("li");
+        li.classList.add("student-item");
+        li.classList.add("cf");
+        li.innerHTML = raw1[i].innerHTML;
+
+        ul.innerHTML = li.innerHTML;
+
+        document.querySelector(".page-header").appendChild(ul);
+        console.log(document.querySelector(".page-header"));
+      };//CONDITIONAL STATEMENT ENDS
+    };
 
 
-    //how to iterate through array 
+// why are things automatically going into a div
+
+
+    //how to iterate through array
 
     //push below into student-list div ul element
     // let appendPage1 = raw1;
@@ -93,9 +108,10 @@ function showPage() {
     // let appendPage5 = raw1;
     // let appendPage6 = raw1;
 
-    console.log(raw1);
 
-    document.querySelector(".student-list").style.display ="none";
+
     // document.querySelector(".page-header").appendChild(`<ul> ${raw1} </ul>`);
     //need to loop through array and grab each indivdiual element to display
 } // function ends
+
+showPage();
