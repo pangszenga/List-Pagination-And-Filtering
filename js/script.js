@@ -7,18 +7,6 @@ FSJS project 2 - List Filter and Pagination
 
 
 /***
-   Add your global variables that store the DOM elements you will
-   need to reference and/or manipulate. ---done
-
-   But be mindful of which variables should be global and which
-   should be locally scoped to one of the two main functions you're
-   going to create. A good general rule of thumb is if the variable
-   will only be used inside of a function, then it can be locally
-   scoped to that function.
-***/
-
-
-/***
    Create the `showPage` function to hide all of the items in the
    list except for the ten you want to show.
 
@@ -33,12 +21,9 @@ FSJS project 2 - List Filter and Pagination
        "invoke" the function
 ***/
 
-
-
-
 /***
    Create the `appendPageLinks function` to generate, append, and add
-   functionality to the pagination buttons.
+   functionality to the pagination buttons. - doing  TODO: create functionality of buttons and search button
 ***/
 
 //Global Variables
@@ -48,13 +33,14 @@ const studentList = Array.from(document.querySelectorAll(".student-item")); // t
 const studentListNames = document.querySelectorAll(".student-details h3"); // name array to search through
 const originalUl = document.querySelector("ul");
 
+//Number of items per page and index each page
 
-//Search Bar
-
-let searchBar = document.createElement("div");
-searchBar.classList.add("student-search");
-searchBar.innerHTML += `<input placeholder="Search for students...">
-                        <button>Search</button>`;
+let raw1 = studentList.slice( 0, 10);
+let raw2 = studentList.slice(10, 20);
+let raw3 = studentList.slice(20, 30);
+let raw4 = studentList.slice(30, 40);
+let raw5 = studentList.slice(40, 50);
+let raw6 = studentList.slice(50, 55);
 
 //Number of Pages
 
@@ -69,6 +55,14 @@ for (let i = 1; i <= numOfPages; i++)
 }; //loop for Number of Pages
 
 
+//Search Bar
+
+let searchBar = document.createElement("div");
+searchBar.classList.add("student-search");
+searchBar.innerHTML += `<input placeholder="Search for students...">
+                        <button>Search</button>`;
+
+
 
 //Buttons
 
@@ -81,21 +75,13 @@ for (let i = 0; i < numOfPagesArray.length; i++)
 {
   pagination.getElementsByTagName("ul")[0].innerHTML += `<li><a href="#${numOfPagesArray[i]}"> ${numOfPagesArray[i]} </a>`;
 
-}; //loop for number of buttons and what should be on the buttons
+}; //loop ends
 
 
 
-//2 Main functions - Search and Pagination (showPage and appendPageLinks functions)
+//Main functions - Search and Pagination (showPage and appendPageLinks functions)
 
 function showPage() {
-  //increment the number of items per page and index each page
-
-  let raw1 = studentList.slice( 0, 10);
-  let raw2 = studentList.slice(10, 20);
-  let raw3 = studentList.slice(20, 30);
-  let raw4 = studentList.slice(30, 40);
-  let raw5 = studentList.slice(40, 50);
-  let raw6 = studentList.slice(50, 55);
 
   //Create ul element
   let ul = document.createElement("ul");
@@ -105,7 +91,7 @@ function showPage() {
   //Hide exisitng list
   page.removeChild(originalUl);
 
-  //Deafult first page
+  //Default to show first page
     for (let i = 0; i <= 9 ; i ++)
     {
       if(i <= 9)
@@ -113,13 +99,24 @@ function showPage() {
         ul.innerHTML += `<li class="student-item cf"> ${raw1[i].innerHTML} </li>`
         page.appendChild(ul);
 
-      };//CONDITIONAL STATEMENT ENDS
+      };//conditional statement ends
 
     };//loop ends
 
+} //function ends
+
+
+
+function appendPageLinks ()
+{
+  //Append items
   page.appendChild(pagination);
   pageHeader.appendChild(searchBar);
 
-} // function ends
+  
+
+
+} //function ends
 
 showPage();
+appendPageLinks();
