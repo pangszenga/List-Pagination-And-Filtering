@@ -42,7 +42,6 @@ FSJS project 2 - List Filter and Pagination
 ***/
 
 //Global Variables
-
 const pageHeader = document.querySelector(".page-header");
 const page = document.querySelector(".page");
 const studentList = Array.from(document.querySelectorAll(".student-item")); // this is an array
@@ -50,72 +49,77 @@ const studentListNames = document.querySelectorAll(".student-details h3"); // na
 const originalUl = document.querySelector("ul");
 
 
+//Search Bar
 
-//Determine the number of blocks of students to display + reminder = disregard limitation of different number of students
+let searchBar = document.createElement("div");
+searchBar.classList.add("student-search");
+searchBar.innerHTML += `<input placeholder="Search for students...">
+                        <button>Search</button>`;
+
+//Number of Pages
 
 let numOfPages = Math.ceil(studentList.length / 10);
-let reminder = studentList.length %10 ; //num of students to dsiplay on last page
+let numOfPagesArray = [];
+let reminder = studentList.length %10 ; //num of students to display on last page
 
-console.log(numOfPages);
-console.log(reminder);
+for (let i = 1; i <= numOfPages; i++)
+{
+    numOfPagesArray.push(i);
+
+}; //loop for Number of Pages
+
+
+
+//Buttons
+
+let pagination = document.createElement("div");
+pagination.classList.add("pagination");
+pagination.innerHTML += "<ul>";
+
+
+for (let i = 0; i < numOfPagesArray.length; i++)
+{
+  pagination.getElementsByTagName("ul")[0].innerHTML += `<li><a href="#${numOfPagesArray[i]}"> ${numOfPagesArray[i]} </a>`;
+
+}; //loop for number of buttons and what should be on the buttons
+
+
+
 //2 Main functions - Search and Pagination (showPage and appendPageLinks functions)
 
 function showPage() {
   //increment the number of items per page and index each page
 
-    let raw1 = studentList.slice( 0, 10);
-    let raw2 = studentList.slice(10, 20);
-    let raw3 = studentList.slice(20, 30);
-    let raw4 = studentList.slice(30, 40);
-    let raw5 = studentList.slice(40, 50);
-    let raw6 = studentList.slice(50, 55);
+  let raw1 = studentList.slice( 0, 10);
+  let raw2 = studentList.slice(10, 20);
+  let raw3 = studentList.slice(20, 30);
+  let raw4 = studentList.slice(30, 40);
+  let raw5 = studentList.slice(40, 50);
+  let raw6 = studentList.slice(50, 55);
 
-  //hide exisitng list
+  //Create ul element
+  let ul = document.createElement("ul");
+  ul.classList.add("student-list");
+
+
+  //Hide exisitng list
   page.removeChild(originalUl);
-  console.log(originalUl);
 
-  //append items to div and link with button THEN link with button click
+  //Deafult first page
     for (let i = 0; i <= 9 ; i ++)
     {
       if(i <= 9)
       {
-        let ul = document.createElement("ul");
-        ul.classList.add("student-list");
+        ul.innerHTML += `<li class="student-item cf"> ${raw1[i].innerHTML} </li>`
+        page.appendChild(ul);
 
-        let li = document.createElement("li");
-
-        li.innerHTML = raw1[i].innerHTML;
-        // li.classList.add("student-item");
-
-        ul.innerHTML = `<li class="student-item cf"> ${li.innerHTML} </li>`;
-
-        console.log(ul);
-
-        document.querySelector(".page-header").appendChild(ul);
-        // console.log(document.querySelector(".page-header"));
       };//CONDITIONAL STATEMENT ENDS
-    };
 
+    };//loop ends
 
+  page.appendChild(pagination);
+  pageHeader.appendChild(searchBar);
 
-
-// why are things automatically going into a div
-
-
-    //how to iterate through array
-
-    //push below into student-list div ul element
-    // let appendPage1 = raw1;
-    // let appendPage2 = raw1;
-    // let appendPage3 = raw1;
-    // let appendPage4 = raw1;
-    // let appendPage5 = raw1;
-    // let appendPage6 = raw1;
-
-
-
-    // document.querySelector(".page-header").appendChild(`<ul> ${raw1} </ul>`);
-    //need to loop through array and grab each indivdiual element to display
 } // function ends
 
 showPage();
