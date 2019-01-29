@@ -113,7 +113,8 @@ function appendPageLinks ()
   page.appendChild(pagination);
   pageHeader.appendChild(searchBar);
 
-  
+  //write search function in here
+  //write button function in here
 
 
 } //function ends
