@@ -27,11 +27,15 @@ FSJS project 2 - List Filter and Pagination
 ***/
 
 //Global Variables
-const pageHeader = document.querySelector(".page-header");
-const page = document.querySelector(".page");
-const studentList = Array.from(document.querySelectorAll(".student-item")); // this is an array
-const studentListNames = document.querySelectorAll(".student-details h3"); // name array to search through
 const originalUl = document.querySelector("ul");
+
+const page = document.querySelector(".page");
+const pageHeader = document.querySelector(".page-header");
+
+const studentList = Array.from(document.querySelectorAll(".student-item")); // this is an array
+const studentNames = Array.from(document.querySelectorAll("h3")); //Names to search through
+
+console.log(studentNames);
 
 //Number of items per page and index each page
 
@@ -59,9 +63,8 @@ for (let i = 1; i <= numOfPages; i++)
 
 let searchBar = document.createElement("div");
 searchBar.classList.add("student-search");
-searchBar.innerHTML += `<input placeholder="Search for students...">
+searchBar.innerHTML += `<input placeholder="Search for students..." type="text" id="input" value="text">
                         <button>Search</button>`;
-
 
 
 //Buttons
@@ -114,8 +117,26 @@ function appendPageLinks ()
   pageHeader.appendChild(searchBar);
 
   //write search function in here
+  const search = () =>
+  {
+    let input = document.getElementById("input").value.toLowerCase();
+
+    // if (studentNames.includes(input))
+    // {
+    //   // Display matching results
+    //   // a.parentElement.style.display = "block";
+    //   console.log('yes');
+    //  }
+    //  else
+    //  {
+    //   // Hide non-matching results
+    //   // a.parentElement.style.display = "none";
+    //   console.log('no');
+    // };//conditional statement ends
+  };
   //write button function in here
 
+  searchBar.addEventListener("keyup", search);
 
 } //function ends
 
