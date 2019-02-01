@@ -33,9 +33,7 @@ const page = document.querySelector(".page");
 const pageHeader = document.querySelector(".page-header");
 
 const studentList = Array.from(document.querySelectorAll(".student-item")); // this is an array
-const studentNames = Array.from(document.querySelectorAll("h3")); //Names to search through
 
-console.log(studentNames);
 
 //Number of items per page and index each page
 
@@ -54,9 +52,19 @@ let reminder = studentList.length %10 ; //num of students to display on last pag
 
 for (let i = 1; i <= numOfPages; i++)
 {
-    numOfPagesArray.push(i);
+  numOfPagesArray.push(i);
 
 }; //loop for Number of Pages
+
+//Names to search through
+let studentNames = [];
+
+for (let i = 0; i < document.querySelectorAll("h3").length; i ++)
+{
+  studentNames.push(document.querySelectorAll("h3")[i].innerHTML);
+};//loop ends
+
+console.log(studentNames);
 
 
 //Search Bar
@@ -121,23 +129,24 @@ function appendPageLinks ()
   {
     let input = document.getElementById("input").value.toLowerCase();
 
-    // if (studentNames.includes(input))
-    // {
-    //   // Display matching results
-    //   // a.parentElement.style.display = "block";
-    //   console.log('yes');
-    //  }
-    //  else
-    //  {
-    //   // Hide non-matching results
-    //   // a.parentElement.style.display = "none";
-    //   console.log('no');
-    // };//conditional statement ends
+    for (let i = 0; i < 9 ; i ++)
+    {
+      if (input.includes(studentNames[i]))
+      {
+        console.log('yes');
+       }
+       else
+       {
+         studentList[i].style.display = "none";
+        console.log('no');
+      };//conditional statement ends
+    };//loop ends
+
   };
   //write button function in here
 
   searchBar.addEventListener("keyup", search);
-
+  //search no work 
 } //function ends
 
 showPage();
