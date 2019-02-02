@@ -25,6 +25,7 @@ Append to page
 GLOBAL VARIABLES
 
 ******************************************/
+const originalUl = document.querySelector("ul");
 const studentList = Array.from(document.querySelectorAll(".student-item"));
 const page = document.querySelector(".page");
 const pageHeader = document.querySelector(".page-header");
@@ -98,15 +99,32 @@ function appendPageLinks()
 
   }//function ends
 
+
+//Event Listener for SearchBar
+
+//Event Listener for Buttons
+
 function showPage()
   {
+    //Create ul element
+    let ul = document.createElement("ul");
+    ul.classList.add("student-list");
+
+    //Hide existing list
+    page.removeChild(originalUl);
+
+
+
+    //ONLY display 10 items at a time
+    for(let i = 0; i < studentItems[0].length; i ++){
+      //Default display 1st 10 studentItems
+      ul.innerHTML += `<li class="student-item cf"> ${studentItems[0][i].innerHTML} </li>`
+      page.appendChild(ul);
+      console.log(studentItems[0]);
+    }
+
+    //Append Buttons and SearchBar
     appendPageLinks();
-
-    //Default display first 10 items
-
-    //Event Listener for SearchBar
-
-    //Event Listener for Buttons
 
   }
 
@@ -115,3 +133,7 @@ showPage();
 
 // what should showPage do? contain search and page click links functionality
 //what should appendPageLinks do? append appropriate page when link is click and hide when not clicked
+
+
+//ul.innerHTML += `<li class="student-item cf"> ${studentItems[i].innerHTML} </li>`
+// page.appendChild(ul);
